@@ -19,5 +19,35 @@ A testbench is a Verilog module used to verify the functionality of an RTL desig
 
 A testbench is mainly used for simulation and is generally not synthesized into the final hardware.    
 ## Simulator     
-A simulator is a software tool that executes the RTL design along with the testbench to verify the design's behavior over time.It helps identify functional errors before implementing the design in hardware.               
-- Tool used: Icarus Verilog (Iverilog)
+A simulator is a software tool that executes the RTL design along with the testbench to verify the design's behavior over time.It helps identify functional errors before implementing the design in hardware.                        
+**Tool used:** Icarus Verilog (Iverilog)  
+
+## Icarus Verilog Simulation Flow                
+1.**Design Input:** Load the Verilog RTL code and testbench into Icarus Verilog.                                                        
+2.**Compilation:** Compile both files to create the simulation executable.                                                                              
+3.**Simulation Execution:** Run the executable to evaluate the design using the testbench inputs.                
+4.**Waveform Generation:** Record signal value changes in a VCD file during simulation.                                                     
+5.**Waveform Visualization:** Open the VCD file in GTKWave to observe signal transitions and verify the design's operation.                                         
+
+**FLOW:**
+
+       RTL Design
+            |
+            v
+       +-----------+
+       |           |
+       | Icarus    | <---- Testbench
+       | Verilog   |
+       |           |
+       +-----------+
+            |
+            v
+         VCD File
+            |
+            v
+        +---------+
+        | GTKWave |
+        +---------+
+            |
+            v
+      Waveform Analysis
