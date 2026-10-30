@@ -60,7 +60,7 @@ I used the following commands:
 ```bash
 git clone https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
 cd sky130RTLDesignAndSynthesisWorkshop
-ls -la
+ll
 ```
 **Sc1:  Repository  Directory Contents**
 <img width="1920" height="1080" alt="Screenshot 2026-10-30 123509" src="https://github.com/user-attachments/assets/ada5b40e-fd38-4e20-be14-e1ac82af4534" />
@@ -120,6 +120,27 @@ The simulation waveform confirms the expected working of the 2:1 multiplexer:
 - When sel = 1, the output y follows input i1.
 
 The observed waveform verifies that the multiplexer operates according to its truth table.
+
+### Step 4: Exploring the Verilog Design and Testbench Files 
+
+After completing the simulation, I explored the Verilog files to understand how the multiplexer was designed and how its functionality was verified using the testbench.
+
+To view both files together, I used the following command in the Ubuntu terminal:
+
+```bash
+gvim tb_good_mux.v -o good_mux.v
+```
+This command opens the two Verilog files in separate horizontal windows in the gvim editor.
+
+- tb_good_mux.v:** Contains the testbench code, which provides input signals, applies test conditions and checks the behavior of the multiplexer.
+
+- good_mux.v:** Contains the actual RTL implementation of the 2:1 multiplexer, including its input, select and output signals.
+
+**Sc4: Verilog Design and Testbench Files in gvim** 
+
+
+<img width="1920" height="1080" alt="Screenshot 2026-10-30 152725" src="https://github.com/user-attachments/assets/fbd96c04-1ba2-4105-be0d-99a95320e543" />
+
 
 ## 3. Introduction to Yosys and Logic Synthesis         
 ### What Does a Synthesizer Do?
@@ -199,7 +220,7 @@ show
 ```
 This command opens a graphical representation of the synthesized multiplexer logic. It helps to understand how the RTL design is represented using logic gates.
 
-**Sc4:Synthesized Logic Diagram:**
+**Sc5:Synthesized Logic Diagram:**
 
 <img width="1920" height="1080" alt="Screenshot 2026-10-30 165801" src="https://github.com/user-attachments/assets/e556ff0b-6397-4250-a929-0830b814e5a2" />
 
@@ -220,7 +241,38 @@ To view the generated netlist in GVim , use
 This generates the technology-mapped Verilog netlist.
 
 
-<img width="1920" height="1080" alt="Screenshot 2026-10-30 171722" src="https://github.com/user-attachments/assets/ea6adafe-e758-4d6c-970e-a4c7ead16f9d" />
+<img width="1920" height="1080" alt="Screenshot 2026-10-30 171722" src="https://github.com/user-attachments/assets/ea6adafe-e758-4d6c-970e-a4c7ead16f9d" />  
+
+## 5.Results and Observations
+The implementation of the project helped verify the different stages of the digital design and synthesis flow. The following observations were made during the practical work:
+
+**1.RTL Development:** The required digital circuit was described using Verilog HDL.
+
+**2.Testbench Preparation:** A testbench was created to provide different input combinations to the design.
+
+**3.Functional Simulation:** The simulation results were examined to confirm that the circuit behaved as expected.
+
+**4.Waveform Observation:** Input and output signal transitions were analyzed using waveform visualization.
+
+**5.RTL Synthesis:** Yosys successfully processed the Verilog design and converted it into an intermediate logic representation.
+
+**6.Logic Optimization:** Unnecessary logic was optimized to obtain a simplified implementation.
+
+**7.Technology Mapping:** ABC mapped the optimized logic to suitable cells from the SKY130 standard-cell library.
+
+**8.Netlist Generation:** The mapped design was exported as a gate-level Verilog netlist.
+
+**9.Post-Synthesis Verification:** The generated netlist was inspected to check the synthesized circuit structure and cell connections.
+
+## 6.Conclusion
+
+Through this project, I gained hands-on experience with RTL design, functional simulation, and logic synthesis using open-source VLSI tools.
+
+The design flow helped me understand how a Verilog description is transformed into an optimized gate-level netlist using Yosys and the SKY130 standard-cell library. I also gained knowledge of Liberty library files, technology mapping, and checking the synthesized output.
+
+Overall, this project strengthened my understanding of the digital design flow and provided a good starting point for exploring advanced ASIC design and physical implementation.
+
+
 
 
 
