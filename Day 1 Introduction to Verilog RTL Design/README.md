@@ -1,7 +1,7 @@
 ## Day 1 – Introduction to Verilog RTL Design and Synthesis      
 ##  Overview         
-This lab introduces the fundamentals of Verilog RTL design, testbenches, simulation, and the RTL simulation flow using open-source tools.                                           
-The session explains how a digital hardware design is described using Verilog, how a testbench verifies the design, and how a simulator executes the design to generate waveform results.
+This introduces the fundamentals of Verilog RTL design, testbenches, simulation, and the RTL simulation flow using open-source tools.                                           
+It explains how a digital hardware design is described using Verilog, how a testbench verifies the design, and how a simulator executes the design to generate waveform results.
 
 ## Objectives
 - Understand the basics of RTL design.     
