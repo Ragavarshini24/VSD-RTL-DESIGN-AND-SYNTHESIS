@@ -51,3 +51,31 @@ A simulator is a software tool that executes the RTL design along with the testb
             |
             v
       Waveform Analysis
+## 2. Lab 1: Repository Setup and RTL Simulation
+
+## Step 1: Cloning the Workshop Repository                                                  
+To begin the lab, I downloaded the required SKY130 RTL Design and Synthesis Workshop repository from GitHub. This repository contains the Verilog design files and other resources needed for the lab activities.  
+
+I used the following commands:            
+```bash
+git clone https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
+cd sky130RTLDesignAndSynthesisWorkshop
+ls -la
+```
+**Sc1:  Repository  Directory Contents**
+<img width="1920" height="1080" alt="Screenshot 2026-10-30 123509" src="https://github.com/user-attachments/assets/ada5b40e-fd38-4e20-be14-e1ac82af4534" />
+After cloning the repository,it will create directory with sky130RTLDesignAndSynthesisWorkshop and it shows the contents of the cloned workshop repository.     
+## Step 2: Accessing the Verilog Files       
+
+Next, I moved into the verilog_files directory to access the RTL design files and their related testbenches.                
+```bash
+cd verilog_files
+ls
+```
+**Sc2:Verilog_files**  
+
+<img width="1920" height="1080" alt="Screenshot 2026-10-30 131625" src="https://github.com/user-attachments/assets/d42082b9-f963-4237-b88a-b3768dd59e83" />  
+
+This directory contains the Verilog source files used to describe the digital circuits, along with testbench files that help verify their functionality through simulation.                            
+
+
