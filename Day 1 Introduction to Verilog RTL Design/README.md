@@ -11,18 +11,18 @@ It explains how a digital hardware design is described using Verilog, how a test
 - Understand the Icarus Verilog simulation flow.             
 - Observe signal transitions using GTKWave.
 ## 1.Introduction to Verilog RTL Design                                                                                              
-## RTL Design                                                                                              
+### RTL Design                                                                                              
 RTL stands for Register Transfer Level. It describes the operation and data transfer of digital hardware using a hardware description language such as Verilog.            
 RTL code specifies how a digital circuit behaves in response to its inputs, clocks, and control signals.                        
-## Testbench    
+### Testbench    
 A testbench is a Verilog module used to verify the functionality of an RTL design.It provides input stimulus to the design under test (DUT), observes the outputs, and helps check whether the design behaves as expected.   
 
 A testbench is mainly used for simulation and is generally not synthesized into the final hardware.    
-## Simulator     
+### Simulator     
 A simulator is a software tool that executes the RTL design along with the testbench to verify the design's behavior over time.It helps identify functional errors before implementing the design in hardware.                        
 **Tool used:** Icarus Verilog (Iverilog)  
 
-## Icarus Verilog Simulation Flow                
+### Icarus Verilog Simulation Flow                
 1.**Design Input:** Load the Verilog RTL code and testbench into Icarus Verilog.                                                        
 2.**Compilation:** Compile both files to create the simulation executable.                                                                              
 3.**Simulation Execution:** Run the executable to evaluate the design using the testbench inputs.                
@@ -53,7 +53,7 @@ A simulator is a software tool that executes the RTL design along with the testb
       Waveform Analysis
 ## 2. Lab 1: Repository Setup and RTL Simulation
 
-## Step 1: Cloning the Workshop Repository                                                  
+### Step 1: Cloning the Workshop Repository                                                  
 To begin the lab, I downloaded the required SKY130 RTL Design and Synthesis Workshop repository from GitHub. This repository contains the Verilog design files and other resources needed for the lab activities.  
 
 I used the following commands:            
@@ -65,7 +65,7 @@ ls -la
 **Sc1:  Repository  Directory Contents**
 <img width="1920" height="1080" alt="Screenshot 2026-10-30 123509" src="https://github.com/user-attachments/assets/ada5b40e-fd38-4e20-be14-e1ac82af4534" />
 After cloning the repository,it will create directory with sky130RTLDesignAndSynthesisWorkshop and it shows the contents of the cloned workshop repository.     
-## Step 2: Accessing the Verilog Files       
+### Step 2: Accessing the Verilog Files       
 
 Next, I moved into the verilog_files directory to access the RTL design files and their related testbenches.                
 ```bash
@@ -77,7 +77,7 @@ ls
 <img width="1920" height="1080" alt="Screenshot 2026-10-30 131625" src="https://github.com/user-attachments/assets/d42082b9-f963-4237-b88a-b3768dd59e83" />  
 
 This directory contains the Verilog source files used to describe the digital circuits, along with testbench files that help verify their functionality through simulation.                            
-## Step 3: 2:1 Multiplexer Simulation Using Icarus Verilog  
+### Step 3: 2:1 Multiplexer Simulation Using Icarus Verilog  
 I used a 2:1 multiplexer design to perform RTL simulation. The Verilog design and its corresponding testbench were loaded into Icarus Verilog for compilation and simu lation.
 
 **Files used:**
@@ -122,4 +122,118 @@ The simulation waveform confirms the expected working of the 2:1 multiplexer:
 The observed waveform verifies that the multiplexer operates according to its truth table.
 
 ## 3. Introduction to Yosys and Logic Synthesis         
+### What Does a Synthesizer Do?
+
+A synthesizer is a tool that converts an RTL (Register Transfer Level) design written in Verilog into a hardware representation using logic gates and standard cells.
+
+In this, Yosys is used to perform RTL synthesis. It helps convert the Verilog design into a gate-level netlist that can be implemented using cells from a selected technology library.
+
+### Understanding Logic Synthesis
+Logic synthesis is the process of transforming a Verilog design into an equivalent hardware circuit.
+
+The main steps involved in synthesis are:
+
+**RTL Reading:** The Verilog source code is loaded and analyzed.
+
+**Logic Optimization:** The design is simplified to remove unnecessary logic and improve efficiency.
+
+**Technology Mapping:** The optimized logic is mapped to suitable standard cells from the target library.
+
+**Netlist Generation:** A gate-level netlist is produced to represent the synthesized circuit.
+
+### Understanding the .lib File
+
+A .lib file, also known as a Liberty file, contains information about the standard cells available in a particular technology library.
+
+It provides important details such as:
+
+- Cell area and power information.                           
+- Timing characteristics and delays.                           
+- Input and output pin details.                               
+- Different cell versions with varying drive strengths.                   
+
+This information helps synthesis and timing analysis tools select appropriate cells for the design.
+
+## 4.Lab 2: Synthesis of a 2:1 Multiplexer Using Yosys
+
+To perform RTL synthesis of a 2:1 multiplexer using Yosys and map the logic to the SKY130 standard-cell library. The synthesized logic is then viewed and written into a Verilog netlist.
+
+### Synthesis Procedure
+
+First, open the Ubuntu terminal and navigate to the project directory. Start the Yosys tool using the following command:   
+
+```bash
+yosys
+```
+After entering the Yosys environment, perform the following steps.  
+
+### Step 1: Read the SKY130 Standard-Cell Library   
+```bash
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+```
+This command loads the SKY130 standard-cell library into Yosys. The library contains the cell definitions required for technology mapping.                       
+
+### Step 2: Read the RTL Design  
+
+```bash
+read_verilog good_mux.v
+```
+This command reads the Verilog RTL file of the 2:1 multiplexer. The design is loaded into Yosys for further processing. Make sure the file is read without errors.
+
+### Step 3: Perform Logic Synthesis
+
+```bash
+synth -top good_mux
+```
+This command synthesizes the RTL design by converting the Verilog description into a logic-level representation. The top module is specified as good_mux.                      
+### Step 4: Technology Mapping Using ABC 
+``` bash
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+```
+ABC is used for logic optimization and technology mapping. It converts the synthesized logic into suitable standard cells available in the SKY130 library.
+
+### Step 5: View the Synthesized Logic
+
+```bash
+show
+```
+This command opens a graphical representation of the synthesized multiplexer logic. It helps to understand how the RTL design is represented using logic gates.
+
+**Sc4:Synthesized Logic Diagram:**
+
+<img width="1920" height="1080" alt="Screenshot 2026-10-30 165801" src="https://github.com/user-attachments/assets/e556ff0b-6397-4250-a929-0830b814e5a2" />
+
+Shows the graphical representation of the synthesized multiplexer after logic optimization and technology mapping.
+
+### Step 6: To write the Netlist
+
+```bash
+write_verilog -noattr good_mux_netlist.v
+```
+This command generates the synthesized Verilog netlist and saves it as good_mux_netlist.v. The netlist represents the design using the mapped standard cells.
+
+To view the generated netlist in GVim , use
+```bash
+!gvim good_mux_netlist.v
+```
+
+This generates the technology-mapped Verilog netlist.
+
+
+<img width="1920" height="1080" alt="Screenshot 2026-10-30 171722" src="https://github.com/user-attachments/assets/ea6adafe-e758-4d6c-970e-a4c7ead16f9d" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
