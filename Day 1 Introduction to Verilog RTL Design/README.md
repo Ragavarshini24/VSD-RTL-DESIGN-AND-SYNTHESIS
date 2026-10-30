@@ -10,6 +10,22 @@ It explains how a digital hardware design is described using Verilog, how a test
 - Learn how RTL design and testbench work together.             
 - Understand the Icarus Verilog simulation flow.             
 - Observe signal transitions using GTKWave.
+
+## Tools and Technologies
+
+The following tools and technologies were used to perform RTL design, functional simulation, waveform analysis, and synthesis.
+
+| **Tool / Technology** | **Purpose** |
+|---|---|
+| Verilog HDL | RTL Design |
+| Icarus Verilog | Functional Simulation |
+| GTKWave | Waveform Analysis |
+| Yosys | RTL Synthesis |
+| SKY130 PDK | Standard Cell Technology |
+| Liberty (.lib) | Standard Cell Characterization |
+| Oracle VirtualBox | Virtualization Platform |
+| Linux (VSD Squadron) | Development Environment |
+
 ## 1.Introduction to Verilog RTL Design                                                                                              
 ### RTL Design                                                                                              
 RTL stands for Register Transfer Level. It describes the operation and data transfer of digital hardware using a hardware description language such as Verilog.            
