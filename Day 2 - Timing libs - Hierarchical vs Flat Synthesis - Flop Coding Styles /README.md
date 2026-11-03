@@ -4,6 +4,7 @@
 - Introduction to Timing Libraries (.lib)
 - Hierarchical vs. Flat Synthesis
 - Efficient Flip-Flop Coding Styles
+- Logic Optimization
  
 # 1. Introduction to Timing Libraries (.lib)
 
@@ -354,7 +355,36 @@ For a 3-bit unsigned input and 6-bit output:
 
 Since \(9 = 8 + 1\), the result can be implemented through bit concatenation rather than a general multiplier.
 
-<img width="1920" height="1080" alt="Screenshot 2026-11-03 162823" src="https://github.com/user-attachments/assets/79b7dfc4-3d6c-4949-b0a2-1830f2a414f7" />
+<img width="1920" height="1080" alt="Screenshot 2026-11-03 162823" src="https://github.com/user-attachments/assets/79b7dfc4-3d6c-4949-b0a2-1830f2a414f7" 
+
+## Key Learnings
+
+- Understood hierarchical and flat synthesis approaches.
+
+- Learned the role of Liberty files in timing analysis and technology mapping.
+
+- Gained hands-on experience with Yosys and SKY130 standard cells.
+
+- Verified asynchronous and synchronous flip-flop behavior through simulation.
+
+- Learned how RTL coding styles affect synthesized hardware.
+
+- Understood logic optimization using bit shifting and direct wiring.
+
+- Gained experience in analyzing synthesized schematics and GTKWave simulation results.
+
+## Tools Used
+
+| Tool | Purpose |
+|---|---|
+| Verilog HDL | RTL design |
+| Yosys | RTL synthesis and optimization |
+| GTKWave | Simulation waveform analysis |
+| Dot Viewer | Synthesized schematic visualization |
+| SKY130 HD Library | Standard cell technology mapping |
+| Liberty (`.lib`) Files | Timing and cell characterization |
+| Icarus Verilog | RTL simulation |
+| abc | Logic optimization and technology mapping |
 
 
 
