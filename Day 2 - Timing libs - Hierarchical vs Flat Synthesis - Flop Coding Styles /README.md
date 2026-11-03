@@ -355,7 +355,8 @@ For a 3-bit unsigned input and 6-bit output:
 
 Since \(9 = 8 + 1\), the result can be implemented through bit concatenation rather than a general multiplier.
 
-<img width="1920" height="1080" alt="Screenshot 2026-11-03 162823" src="https://github.com/user-attachments/assets/79b7dfc4-3d6c-4949-b0a2-1830f2a414f7" 
+<img width="1920" height="1080" alt="Screenshot 2026-11-03 162823" src="https://github.com/user-attachments/assets/8719200b-8622-4623-ba3a-0c3a1bcdf655" />
+
 
 ## Key Learnings
 
