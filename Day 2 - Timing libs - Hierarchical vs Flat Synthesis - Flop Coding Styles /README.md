@@ -166,6 +166,164 @@ This experiment helps in understanding how individual RTL modules are converted 
 | Flat synthesis | Submodule boundaries are removed, and the design is flattened. |
 | Submodule-level synthesis | Individual submodule logic is synthesized independently. |
 
+## 3.Efficient Flop Coding Styles
+
+Flip-flops are important sequential logic elements used to store binary data. They are widely used in registers, counters, state machines, and digital systems.
+
+In this lab, three different flip-flop coding styles were implemented, simulated, and synthesized using the SKY130 standard cell library.
+
+### 3.1 Asynchronous Reset Flip-Flop
+
+An asynchronous reset flip-flop resets its output independently of the clock signal.
+
+When the reset signal is asserted, the output q is immediately reset to logic 0. When the reset is inactive, the flip-flop captures the input data d at the active clock edge.
+
+### RTL Coding Style
+
+```verilog
+module dff_asyncres ( input clk , input async_reset , input d , output reg q );
+always @ (posedge clk or posedge async_reset)
+begin
+    if (async_reset)
+        q <= 1'b0;
+    else
+        q <= d;
+end
+endmodule
+```
+
+### Simulation Result
+
+- The simulation waveform verifies the following behavior:
+
+- The clock signal toggles continuously.
+
+- The input data changes during simulation.
+
+- When asynchronous reset is asserted, the output becomes 0 without waiting for a clock edge.
+
+- When reset is deasserted, the output follows the input at the next active clock edge.
+
+### Simulation Waveform:
+
+<img width="1920" height="1080" alt="async_reset_simulation" src="https://github.com/user-attachments/assets/45ea3c8c-87ea-49db-a67d-a2896d27e4d4" />
+
+### Synthesis Result
+
+The RTL was synthesized using Yosys and mapped to the SKY130 standard cell library.
+
+The synthesized schematic shows the asynchronous reset flip-flop implementation using a standard cell with an asynchronous reset control pin.
+
+### Synthesized Schematic:
+
+<img width="1920" height="1080" alt="async_reset_synthesis" src="https://github.com/user-attachments/assets/b4f135e2-3059-42c3-acd8-fadd68d765c3" />
+
+### 3.2 Asynchronous Set Flip-Flop
+
+An asynchronous set flip-flop sets its output to logic 1 independently of the clock signal.
+
+When the asynchronous set signal is asserted, the output q becomes 1 immediately. When the set signal is inactive, the flip-flop captures the input data at the active clock edge.
+
+### RTL Coding Style
+
+```verilog
+module dff_async_set ( input clk , input async_set , input d , output reg q );
+always @ (posedge clk , posedge async_set)
+begin
+    if(async_set)
+        q <= 1'b1;
+    else
+        q <= d;
+end
+endmodule
+```
+
+### Simulation Result 
+
+The simulation waveform verifies the following behavior:
+
+- The clock signal toggles continuously.
+
+- The input data changes during simulation.
+
+- When asynchronous set is asserted, the output becomes 1 immediately.
+
+- When set is deasserted, the output captures the input data at the next active clock edge.
+
+### Simulation Waveform:
+
+<img width="1920" height="1080" alt="async_set_simulation" src="https://github.com/user-attachments/assets/6c939ec6-427f-4aab-8e0d-0f7737beada9" />
+
+### Synthesis Result
+
+The RTL was synthesized using Yosys and mapped to the SKY130 standard cell library.
+
+The synthesized schematic shows an asynchronous set flip-flop with a dedicated set control pin.
+
+### Synthesized Schematic:
+
+<img width="1920" height="1080" alt="async_set_synthesis" src="https://github.com/user-attachments/assets/1f7d3d1e-a12d-4875-b63b-0c696ce8f203" />
+
+### 3.3 Synchronous Reset Flip-Flop
+
+A synchronous reset flip-flop resets its output only at the active clock edge.
+
+When the synchronous reset signal is asserted, the output becomes 0 at the next active clock edge. Unlike asynchronous reset, the output does not change immediately when the reset signal changes.
+
+### RTL Coding Style
+
+```verilog
+module dff_syncres ( input clk , input async_reset , input sync_reset , input d , output reg q );
+always @ (posedge clk)
+begin
+    if (sync_reset)
+        q <= 1'b0;
+    else
+        q <= d;
+end
+endmodule
+```
+
+### Simulation Result
+
+The simulation waveform verifies the following behavior:
+
+- The clock signal toggles continuously.
+
+- The input data changes during simulation.
+
+- When synchronous reset is asserted, the output becomes 0 at the active clock edge.
+
+- When reset is deasserted, the output captures the input data at the next active clock edge.
+
+### Simulation Waveform:
+
+<img width="1920" height="1080" alt="sync_reset_simulation" src="https://github.com/user-attachments/assets/ad112916-4bb1-4ad5-a854-874773160c0e" />
+
+### Synthesis Result
+
+The RTL was synthesized using Yosys and mapped to the SKY130 standard cell library.
+
+The synthesized schematic shows a synchronous reset implementation using combinational logic and a standard D flip-flop.
+
+The reset logic is implemented before the D input of the flip-flop.
+
+### Synthesized Schematic:
+
+<img width="1920" height="1080" alt="sync_reset_synthesis" src="https://github.com/user-attachments/assets/ea7ddae5-c003-4cee-bc92-f9b6554e5c52" />
+
+## Comparison of Flip-Flop Coding Styles
+
+The following table compares the behavior and synthesis implementation of asynchronous reset, asynchronous set, and synchronous reset flip-flops.
+
+| Feature | Asynchronous Reset | Asynchronous Set | Synchronous Reset |
+|---|---|---|---|
+| Reset / Set behavior | Independent of clock | Independent of clock | Depends on clock |
+| Output when control is asserted | 0 (Logic LOW) | 1 (Logic HIGH) | 0 (Logic LOW) |
+| Control checked | At any time | At any time | At active clock edge |
+| RTL sensitivity | `posedge clk` and `posedge async_reset` | `posedge clk` and `posedge async_set` | `posedge clk` |
+| Typical synthesis mapping | Reset-capable flip-flop | Set-capable flip-flop | D flip-flop with reset logic |
+
 
 
 
