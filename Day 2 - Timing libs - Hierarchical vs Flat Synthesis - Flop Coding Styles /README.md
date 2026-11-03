@@ -324,6 +324,42 @@ The following table compares the behavior and synthesis implementation of asynch
 | RTL sensitivity | `posedge clk` and `posedge async_reset` | `posedge clk` and `posedge async_set` | `posedge clk` |
 | Typical synthesis mapping | Reset-capable flip-flop | Set-capable flip-flop | D flip-flop with reset logic |
 
+## 4. Logic Optimization
+
+Logic optimization is an important step in RTL design that helps reduce unnecessary hardware and improve circuit efficiency.
+
+In this experiment, multiplication operations were implemented using Verilog HDL and synthesized using Yosys. The synthesized schematics were analyzed to understand how simple arithmetic operations can be optimized into basic wiring connections instead of using general-purpose multiplier hardware.
+
+The following operations were studied:
+
+- Multiplication by 2
+
+- Multiplication by 9
+
+### 4.1 Multiplication by 2       
+
+For a 3-bit unsigned input `a` and 4-bit output `y`:
+
+`y = a * 2`
+
+This is equivalent to `y = {a, 1'b0}`. Synthesis can implement the operation using a shift and wiring instead of a general multiplier.
+
+<img width="1920" height="1080" alt="Screenshot 2026-11-03 161010" src="https://github.com/user-attachments/assets/da0f15b6-c89f-4775-b841-f16ad69e18c5" />
+
+### Multiplication by Nine
+
+For a 3-bit unsigned input and 6-bit output:
+
+`y = a * 9 = {a, a}`
+
+Since \(9 = 8 + 1\), the result can be implemented through bit concatenation rather than a general multiplier.
+
+<img width="1920" height="1080" alt="Screenshot 2026-11-03 162823" src="https://github.com/user-attachments/assets/79b7dfc4-3d6c-4949-b0a2-1830f2a414f7" />
+
+
+
+
+
 
 
 
