@@ -111,7 +111,7 @@ If multiple outputs are assigned in a case statement, every output must be assig
 
 Avoid overlapping wildcard case conditions, as they can produce ambiguous or priority-dependent behavior depending on the case construct used.
 
-## 5. Lab 1 – Incomplete If Statement
+## 4. Lab 1 – Incomplete If Statement
 
 ```verilog
 module incomp_if (
@@ -133,4 +133,33 @@ endmodule
 In this code, `y` is assigned a value only when `i0` is HIGH (1). When `i0` is LOW (0), no assignment takes place, so `y` holds its previous value.
 
 As a result, synthesis infers a `D latch` to maintain the previous output value.
+
+### 4.1 RTL Simulation
+
+The Verilog design and testbench are given to Icarus Verilog.
+
+```bash
+iverilog incomp_if.v tb_incomp_if.v
+./a.out
+```
+
+The VCD file generated during simulation is opened using GTKWave.
+
+```bash
+gtkwave tb_incomp_if.vcd
+```
+
+### Screenshot1: Simulation Waveform
+
+<img width="1920" height="1080" alt="01_incomp_if_simulation" src="https://github.com/user-attachments/assets/3087c609-49bd-4f6c-a85e-874d69bfed71" />
+
+- Whenever `i0` is going low, the output `y` is latching on something either `1` or `0` permanently. There is no change in `y` whenever `i0` is zero or low.
+- This clearly be latching action.
+- Whenever the signal is high, output `y` is following `i1`.
+
+
+
+
+
+
 
